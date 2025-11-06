@@ -1,0 +1,11 @@
+#dateDisplay {
+    position: absolute;
+    top: 17px; /* Menambahkan nilai top untuk menurunkan posisi */
+    right: 10px;
+    color: #FFFFFF; /* Warna font putih */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1; /* Pastikan elemen ini berada di atas elemen lainnya */
+  }
