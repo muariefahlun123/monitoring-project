@@ -123,7 +123,7 @@ function handleFileUpload(event) {
 function displayShapefile(geojson, fileName) {
   var shapefileLayer = L.geoJSON(geojson, {
     style: function () {
-      return { color: '#0000ff', weight: 2, opacity: 0.8, fillOpacity: 0.1 };
+      return { color: '#0000ff', weight: 2, opacity: 0.8, fillOpacity: 0 };
     },
     onEachFeature: function (feature, layer) {
       if (feature.properties) {
