@@ -63,7 +63,7 @@ var ortho = L.tileLayer('./data/raster/baru/{z}/{x}/{y}.png', {
 //     Pastikan <script src="./data/boundery.js"></script> ada sebelum main.js di index.html (sudah benar). :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}
 var boundaryStyle = {
   color: '#ff0000',   
-  weight: 3,
+  weight: 2,
   opacity: 1,
   fillOpacity: 0 
 };
