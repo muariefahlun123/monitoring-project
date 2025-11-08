@@ -123,7 +123,7 @@ function handleFileUpload(event) {
 function displayShapefile(geojson, fileName) {
   var shapefileLayer = L.geoJSON(geojson, {
     style: function () {
-      return { color: '#df0000', weight: 2, opacity: 0.8, fillOpacity: 0.1 };
+      return { color: '#0000ff', weight: 2, opacity: 0.8, fillOpacity: 0.1 };
     },
     onEachFeature: function (feature, layer) {
       if (feature.properties) {
@@ -160,8 +160,8 @@ var baseMaps = {
 
 var overlayMaps = {
   'Central Point': singleMarker,
-  'November Week 1 (TMS)': ortho,
-  'Project Boundary': boundaryLayer // <— boundary ikut layer control
+  'November Week 1 ': ortho,
+  'Boundary': boundaryLayer // <— boundary ikut layer control
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps, {
