@@ -1,7 +1,3 @@
-// =========================
-// main.js — WebGIS Project
-// =========================
-
 // 1) Penampung layer yang diunggah (shapefile ZIP/SHP)
 var uploadedLayers = [];
 
@@ -51,7 +47,14 @@ var singleMarker = L.marker([-6.3960396135632545, 106.69422324044139]).bindPopup
 
 // 5) Overlay raster hasil gdal2tiles (TMS)
 //    Catatan: path folder sesuaikan dengan struktur Anda
-var ortho = L.tileLayer('./data/raster/baru/{z}/{x}/{y}.png', {
+var ortho = L.tileLayer('./data/raster/Nov/{z}/{x}/{y}.png', {
+  tms: true,
+  minZoom: 5,
+  maxZoom: 22,
+  attribution: ''
+}).addTo(map);
+
+var ortho1 = L.tileLayer('./data/raster/Des/{z}/{x}/{y}.png', {
   tms: true,
   minZoom: 5,
   maxZoom: 22,
@@ -160,7 +163,8 @@ var baseMaps = {
 
 var overlayMaps = {
   'Central Point': singleMarker,
-  'November Week 1 ': ortho,
+  'November': ortho,
+  'Desember': ortho1,
   'Boundary': boundaryLayer // <— boundary ikut layer control
 };
 
