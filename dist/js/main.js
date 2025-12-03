@@ -1,11 +1,8 @@
 // 1) Penampung layer yang diunggah (shapefile ZIP/SHP)
 var uploadedLayers = [];
-
-// 2) Inisialisasi peta
 var map = L.map('map').setView([-6.3960396135632545, 106.69422324044139], 16);
 map.zoomControl.setPosition('topright');
 
-// 3) Basemap
 var esriSatellite = L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   { minZoom: 5, maxZoom: 22, attribution: '&copy; Esri' }
@@ -42,11 +39,8 @@ var darkBaseMap = L.tileLayer(
   { minZoom: 5, maxZoom: 22, attribution: '&copy; <a href="https://carto.com/attributions">carto</a>' }
 );
 
-// 4) Marker contoh di pusat peta
 var singleMarker = L.marker([-6.3960396135632545, 106.69422324044139]).bindPopup('Central Point');
 
-// 5) Overlay raster hasil gdal2tiles (TMS)
-//    Catatan: path folder sesuaikan dengan struktur Anda
 var ortho = L.tileLayer('./data/raster/Nov/{z}/{x}/{y}.png', {
   tms: true,
   minZoom: 5,
@@ -71,7 +65,7 @@ var boundaryStyle = {
   fillOpacity: 0 
 };
 
-// Helper untuk popup properti yang rapi
+
 function buildPropertiesTable(props) {
   if (!props) return 'No properties';
   return '<table style="margin:0;">' + Object.keys(props).map(function (k) {
@@ -79,8 +73,6 @@ function buildPropertiesTable(props) {
   }).join('') + '</table>';
 }
 
-// Buat layer GeoJSON untuk boundary
-// "boundary" berasal dari boundery.js (FeatureCollection Polygon). :contentReference[oaicite:4]{index=4}
 var boundaryLayer = L.geoJSON(boundary, {
   style: boundaryStyle,
   onEachFeature: function (feature, layer) {
@@ -88,7 +80,7 @@ var boundaryLayer = L.geoJSON(boundary, {
   }
 }).addTo(map);
 
-// Opsional: zoom awal mengikuti boundary jika ingin
+
 try {
   var bndBounds = boundaryLayer.getBounds();
   if (bndBounds.isValid()) {
@@ -98,15 +90,14 @@ try {
   console.warn('Boundary bounds invalid or not polygon:', e);
 }
 
-// 7) Skala peta
+
 L.control.scale().addTo(map);
 
-// 8) Koordinat kursor
 map.on('mousemove', function (e) {
   $('.coordinate').html('Lat: ' + e.latlng.lat.toFixed(4) + ' Lng: ' + e.latlng.lng.toFixed(4));
 });
 
-// 9) Upload Shapefile (ZIP/SHP) -> tampilkan sebagai layer + masukkan ke Layer Control
+
 function handleFileUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -148,10 +139,8 @@ function updateLayerControl(fileName, shapefileLayer) {
   layerControl.addOverlay(shapefileLayer, layerName);
 }
 
-// Pasang event upload input dari index.html
 document.getElementById('shpFileInput').addEventListener('change', handleFileUpload);
 
-// 10) Definisi Layer Control (basemap & overlay)
 var baseMaps = {
   'Esri Satellite': esriSatellite,
   'Google Satellite': googleSatellite,
@@ -165,7 +154,7 @@ var overlayMaps = {
   'Central Point': singleMarker,
   'November': ortho,
   'Desember': ortho1,
-  'Boundary': boundaryLayer // <— boundary ikut layer control
+  'Boundary': boundaryLayer
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps, {
@@ -173,15 +162,13 @@ var layerControl = L.control.layers(baseMaps, overlayMaps, {
   position: 'topleft'
 }).addTo(map);
 
-// 11) Tombol "Zoom to layer" (pojok kiri — ikon rumah di index.html)
-//     Akan nge-zoom ke gabungan boundary + semua layer yang di-upload.
 function zoomToVectorLayers() {
   var groupMembers = [];
 
-  // Boundary
+
   if (boundaryLayer && boundaryLayer.getBounds) groupMembers.push(boundaryLayer);
 
-  // Uploaded GeoJSON (shapefile)
+
   uploadedLayers.forEach(function (lyr) {
     if (lyr && lyr.getBounds) groupMembers.push(lyr);
   });
@@ -198,13 +185,11 @@ function zoomToVectorLayers() {
   }
 }
 
-// Kaitkan ke tombol di HTML
 var zoomBtn = document.querySelector('.zoom-to-layer');
 if (zoomBtn) {
   zoomBtn.addEventListener('click', zoomToVectorLayers);
 }
 
-// 12) (Opsional) Fallback jika fungsi fullScreenView tidak didefinisikan di file lain
 if (typeof fullScreenView !== 'function') {
   window.fullScreenView = function () {
     var elem = document.getElementById('map');
