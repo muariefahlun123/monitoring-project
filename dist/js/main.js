@@ -41,19 +41,28 @@ var darkBaseMap = L.tileLayer(
 
 var singleMarker = L.marker([-6.3960396135632545, 106.69422324044139]).bindPopup('Central Point');
 
-var ortho = L.tileLayer('./data/raster/Nov/{z}/{x}/{y}.png', {
+var ortho2 = L.tileLayer('./data/raster/Jan/{z}/{x}/{y}.png', {
   tms: true,
   minZoom: 5,
   maxZoom: 22,
   attribution: ''
 }).addTo(map);
 
+
 var ortho1 = L.tileLayer('./data/raster/Des/{z}/{x}/{y}.png', {
   tms: true,
   minZoom: 5,
   maxZoom: 22,
   attribution: ''
-}).addTo(map);
+});
+
+var ortho = L.tileLayer('./data/raster/Nov/{z}/{x}/{y}.png', {
+  tms: true,
+  minZoom: 5,
+  maxZoom: 22,
+  attribution: ''
+});
+
 
 // 6) ==== MEMUAT GEOJSON BOUNDARY ====
 //     File ./data/boundery.js mendefinisikan var global "boundary"
@@ -152,8 +161,9 @@ var baseMaps = {
 
 var overlayMaps = {
   'Central Point': singleMarker,
-  'November': ortho,
-  'Desember': ortho1,
+  'Januari 2026': ortho2,
+  'Desember 2025': ortho1,
+  'November 2025': ortho,
   'Boundary': boundaryLayer
 };
 
