@@ -64,9 +64,6 @@ var ortho = L.tileLayer('./data/raster/Nov/{z}/{x}/{y}.png', {
 });
 
 
-// 6) ==== MEMUAT GEOJSON BOUNDARY ====
-//     File ./data/boundery.js mendefinisikan var global "boundary"
-//     Pastikan <script src="./data/boundery.js"></script> ada sebelum main.js di index.html (sudah benar). :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}
 var boundaryStyle = {
   color: '#ff0000',   
   weight: 2,
