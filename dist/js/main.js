@@ -41,12 +41,19 @@ var darkBaseMap = L.tileLayer(
 
 var singleMarker = L.marker([-6.3960396135632545, 106.69422324044139]).bindPopup('Central Point');
 
-var ortho2 = L.tileLayer('./data/raster/Jan/{z}/{x}/{y}.png', {
+var ortho3 = L.tileLayer('./data/raster/Feb/{z}/{x}/{y}.png', {
   tms: true,
   minZoom: 5,
   maxZoom: 22,
   attribution: ''
 }).addTo(map);
+
+var ortho2 = L.tileLayer('./data/raster/Jan/{z}/{x}/{y}.png', {
+  tms: true,
+  minZoom: 5,
+  maxZoom: 22,
+  attribution: ''
+});
 
 
 var ortho1 = L.tileLayer('./data/raster/Des/{z}/{x}/{y}.png', {
@@ -158,7 +165,8 @@ var baseMaps = {
 
 var overlayMaps = {
   'Central Point': singleMarker,
-  'Januari 2026': ortho2,
+  'February 2026': ortho3,
+  'January 2026': ortho2,
   'Desember 2025': ortho1,
   'November 2025': ortho,
   'Boundary': boundaryLayer
